@@ -5,7 +5,7 @@ const Card = ({ item, onHover }) => {
 		location.href = item.uri
 	}
 
-	const clippingLen = 30000
+	const clippingLen = 30
 
 	return (
 		<div

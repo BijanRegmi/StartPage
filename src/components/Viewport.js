@@ -1,21 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext, createContext } from "react"
 import Card from "./Card"
-
-const bookmarks = require("../../bookmarks.json").children[1].children
+import Search from "./Search"
+import { configContext } from "../App"
 
 const Viewport = () => {
-	const [hovered, setHovered] = useState(0)
+	const { bookmarks } = useContext(configContext)
+
+	const [hovered, setHovered] = useState(-1)
 	const [hoveredTitle, setHoveredTitle] = useState("...")
 
-	const mouseEnterHandler = e => {
-		e.preventDefault()
-		console.log(e)
-		setHovered(parseInt(e._targetInst?.key))
-	}
-
-	const setTitle = title => {
-		setHoveredTitle(title)
-	}
+	const mouseEnterHandler = e => setHovered(parseInt(e._targetInst?.key))
+	const setTitle = title => setHoveredTitle(title)
 
 	return (
 		<div className="viewport">
@@ -28,33 +23,31 @@ const Viewport = () => {
 					Search
 				</div>
 
-				{bookmarks.map(folder => {
-					if (folder.type != "text/x-moz-place-container") return
+				{bookmarks.map((folder, idx) => {
 					return (
 						<div
 							onMouseEnter={mouseEnterHandler}
 							className="folder"
-							key={folder.id}
+							key={idx}
 						>
 							{folder.title}
 						</div>
 					)
 				})}
 			</div>
-			<div className="childrens">
-				{hovered === -1
-					? "LEL"
-					: bookmarks
-							.filter(item => item.id === hovered)[0]
-							?.children?.map((child, index) => (
-								<Card
-									onHover={setTitle}
-									item={child}
-									key={child.id}
-								/>
-							))}
-			</div>
-			<div className="title">{hoveredTitle}</div>
+
+			{hovered === -1 ? (
+				<Search />
+			) : (
+				<>
+					<div className="childrens">
+						{bookmarks[hovered]?.childrens?.map((child, index) => (
+							<Card onHover={setTitle} item={child} key={index} />
+						))}
+					</div>
+					<div className="title">{hoveredTitle}</div>
+				</>
+			)}
 		</div>
 	)
 }
