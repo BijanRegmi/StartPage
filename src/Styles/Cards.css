@@ -1,0 +1,31 @@
+.cards {
+	grid-row: 2/4;
+	grid-column: 2;
+
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+
+	padding: 1rem;
+	row-gap: 1rem;
+	column-gap: 1rem;
+
+	overflow: hidden scroll !important;
+	background-color: lightgreen;
+}
+
+.card {
+	height: 100%;
+	padding: 0.5rem;
+
+	border-radius: 1rem;
+	border: 1px solid black;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: crosshair;
+}
+
+.card:hover {
+	border: 1px solid red;
+}
