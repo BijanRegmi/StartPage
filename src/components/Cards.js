@@ -24,7 +24,7 @@ const Cards = () => {
 	const clippingLen = 30
 
 	return (
-		<div className="cards item">
+		<div className="item cards">
 			{bookmarks[currentTabIdx]?.childrens?.map((card, idx) => (
 				<div
 					key={idx}
