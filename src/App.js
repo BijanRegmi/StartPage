@@ -1,11 +1,9 @@
-import react, { createContext } from "react"
-import { config } from "../config"
+import { Provider } from "react-redux"
 import Viewport from "./components/Viewport"
-
-export const configContext = createContext()
+import store from "./StateManagement/store"
 
 export default () => (
-	<configContext.Provider value={config}>
+	<Provider store={store}>
 		<Viewport />
-	</configContext.Provider>
+	</Provider>
 )

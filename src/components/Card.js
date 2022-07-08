@@ -1,17 +1,24 @@
 import React from "react"
+import { useDispatch } from "react-redux"
 
-const Card = ({ item, onHover }) => {
-	const clickHandler = e => {
-		location.href = item.uri
-	}
+import { SET_TITLE } from "../StateManagement/action_types"
+
+const Card = ({ item }) => {
+	// StateManagement
+	const dispatch = useDispatch()
+
+	// Helper Functions
+	const clickHandler = () => (location.href = item.uri)
+	const setTitle = () => dispatch({ type: SET_TITLE, payload: item.title })
+	const clearTitle = () => dispatch({ type: SET_TITLE, payload: "..." })
 
 	const clippingLen = 30
 
 	return (
 		<div
 			className="card"
-			onMouseEnter={() => onHover(item.title)}
-			onMouseLeave={() => onHover("...")}
+			onMouseEnter={setTitle}
+			onMouseLeave={clearTitle}
 			onClick={clickHandler}
 		>
 			{item.title.length > clippingLen
