@@ -32,11 +32,6 @@ body,
 	overflow: hidden;
 }
 
-.tabs {
-	grid-row: 1/-1;
-	grid-column: 3;
-}
-
 .weather {
 	grid-row: 2;
 	grid-column: 1;

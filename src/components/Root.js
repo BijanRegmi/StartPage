@@ -1,5 +1,6 @@
 import React from "react"
 import Search from "./Search"
+import Tabs from "./Tabs"
 import Time from "./Time"
 
 const Root = () => {
@@ -8,7 +9,7 @@ const Root = () => {
 			{/* Time */}
 			<Time />
 			{/* Tabs */}
-			<div className="item tabs">Tabs</div>
+			<Tabs />
 			{/* Weather */}
 			<div className="item weather">Weather</div>
 			{/* Childrens */}
