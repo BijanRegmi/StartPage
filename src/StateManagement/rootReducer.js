@@ -27,7 +27,7 @@ const initalState = {
 	activeSuggestion: -1,
 }
 
-const visit = location => (window.location = location)
+export const visit = location => (window.location = location)
 
 const rootReducer = (state = initalState, action) => {
 	switch (action.type) {
