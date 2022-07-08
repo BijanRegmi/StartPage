@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import "../Styles/Search.css"
 
 import {
 	EMPTY_SUGGESTION,
@@ -8,8 +9,9 @@ import {
 	SET_TITLE,
 } from "../StateManagement/action_types"
 
-const Search = ({ insertRef }) => {
+const Search = () => {
 	// State Management
+	const { insertRef, insertMode } = useSelector(state => state.root)
 	const dispatch = useDispatch()
 	const {
 		querySuggestions,
@@ -44,20 +46,23 @@ const Search = ({ insertRef }) => {
 	useEffect(fetchSuggestions, [queryString, activeEngine])
 
 	return (
-		<div className="search">
+		<div className="item search">
 			<input
 				type="text"
 				className={`query-input ${
-					querySuggestions.length ? "bottomActive" : ""
+					querySuggestions.length
+						? "row1--transit removeBottomBorder"
+						: ""
 				}`}
 				ref={insertRef}
 				onChange={changeQuery}
+				placeholder="What do you wanna know?"
 			/>
 
 			<div
 				className={`setEngine ${
-					engineListVisible ? "bottomActive" : ""
-				}`}
+					engineListVisible ? "removeBottomBorder" : ""
+				} ${querySuggestions.length ? "row1--transit" : ""}`}
 				onMouseEnter={showEngines}
 				onMouseLeave={hideEngines}
 			>
@@ -88,7 +93,9 @@ const Search = ({ insertRef }) => {
 
 			{engineListVisible ? (
 				<div
-					className="engines"
+					className={`engines ${
+						querySuggestions.length ? "engines--transit" : ""
+					}`}
 					onMouseEnter={showEngines}
 					onMouseLeave={hideEngines}
 				>
