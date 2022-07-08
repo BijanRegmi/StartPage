@@ -18,7 +18,7 @@ const initalState = {
 	outerRef: createRef(),
 	insertMode: true,
 
-	currentTabIdx: -1,
+	currentTabIdx: 0,
 	activeCard: -1,
 	title: "...",
 
