@@ -1,0 +1,12 @@
+.time {
+	grid-row: 1;
+	grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time > p {
+    font-size: 3rem;
+    font-weight: 600;
+}
