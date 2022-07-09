@@ -1,0 +1,25 @@
+.cmd {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.prompt {
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+#stdin {
+    flex-grow: 1;
+    padding: 0.25rem;
+    font-size: small;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
+}
+
+#stdin:focus,
+#stdin:hover {
+    outline: none;
+}

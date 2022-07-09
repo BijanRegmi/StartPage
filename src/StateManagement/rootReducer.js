@@ -12,6 +12,7 @@ import {
 	CHANGE_TAB,
 	EMPTY_SUGGESTION,
 	LOAD_SUGGESTION,
+	RESET,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
 	SET_SUGGESTION,
@@ -22,7 +23,7 @@ import {
 	TABS_UP,
 } from "./action_types"
 
-const initalState = {
+const initialState = {
 	config,
 
 	insertRef: createRef(),
@@ -43,7 +44,7 @@ const initalState = {
 
 export const visit = location => (window.location = location)
 
-const rootReducer = (state = initalState, action) => {
+const rootReducer = (state = initialState, action) => {
 	let temp
 	switch (action.type) {
 		case SET_TITLE:
@@ -185,6 +186,10 @@ const rootReducer = (state = initalState, action) => {
 				temp = cur_r * 4 + cur_c
 			}
 			return { ...state, activeCard: temp == NaN ? -1 : temp }
+
+		// CMD
+		case RESET:
+			return initialState
 		default:
 			return state
 	}

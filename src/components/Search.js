@@ -43,8 +43,6 @@ const Search = () => {
 
 	// Use Effects
 	useEffect(() => {
-		console.log("Rendering search")
-		insertRef.current.focus()
 		dispatch({ type: SET_TITLE, payload: "Search" })
 	}, [])
 	useEffect(fetchSuggestions, [queryString, activeEngine])

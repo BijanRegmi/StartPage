@@ -79,4 +79,12 @@ export const config = {
 			key: "r",
 		},
 	},
+	links: {
+		"yt": "https://www.youtube.com/",
+		"gh": "https://www.github.com/",
+		"fb": "https://www.facebook.com/",
+		"ms": "https://www.messenger.com/",
+		"tl": "https://web.telegram.org/",
+		"sp": "https://open.spotify.com/",
+	},
 }
