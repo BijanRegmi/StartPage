@@ -5,6 +5,7 @@ import Cmd from "./components/Cmd"
 import Search from "./components/Search"
 import Tabs from "./components/Tabs"
 import Time from "./components/Time"
+import "./Styles/themes.css"
 import {
 	CARD_DOWN,
 	CARD_LEFT,
@@ -109,7 +110,7 @@ export default () => {
 
 	return (
 		<div
-			className="startpage"
+			className="startpage nord"
 			tabIndex={0}
 			onKeyDown={handleKeyEvents}
 			ref={state.rootRef}

@@ -1,25 +1,35 @@
 .cmd {
+	grid-row: 4;
+	grid-column: 1/-2;
+
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
 
 .prompt {
-    margin-left: 0.5rem;
-    margin-right: 1rem;
-    text-align: center;
+	margin-left: 0.5rem;
+	margin-right: 1rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--prompt-bg);
+	color: var(--prompt-fg);
 }
 
 #stdin {
-    flex-grow: 1;
-    padding: 0.25rem;
-    font-size: small;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid white;
+	flex-grow: 1;
+	padding: 0.25rem;
+	font-size: small;
+	border: 0;
+	border-bottom: 1px solid var(--stdin-border);
+	background-color: var(--stdin-bg);
+	color: var(--stdin-fg);
 }
 
 #stdin:focus,
 #stdin:hover {
-    outline: none;
+	outline: none;
 }

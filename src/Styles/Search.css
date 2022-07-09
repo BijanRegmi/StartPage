@@ -18,6 +18,8 @@
 
 	border: 0;
 	border-radius: 0.6rem;
+	background-color: var(--query-bg);
+	color: var(--query-fg);
 }
 
 .query-input:hover,
@@ -36,9 +38,10 @@
 	margin-right: 0.25rem;
 	padding: 0 0.5rem;
 
-	background-color: white;
 	border-radius: 0.5rem;
 	cursor: crosshair;
+	background-color: var(--setengine-bg);
+	color: var(--setengine-fg);
 }
 
 .row1--transit {
@@ -58,7 +61,8 @@
 
 	overflow: scroll;
 	text-overflow: ellipsis;
-	background-color: lightcyan;
+	background-color: var(--engines-bg);
+	color: var(--engines-fg);
 }
 
 .engines--transit {
@@ -73,6 +77,8 @@
 	width: 90%;
 	text-align: center;
 	cursor: pointer;
+	background-color: var(--engine-bg);
+	color: var(--engine-fg);
 }
 
 .engine:hover {
@@ -88,18 +94,21 @@
 	margin-right: 0.25rem;
 
 	overflow: hidden scroll;
-	background-color: lightcyan;
 	border-radius: 0 0 0.6rem 0.6rem;
+	background-color: var(--suggestions-bg);
 }
 
 .suggestion {
 	margin-bottom: 0.5rem;
 	text-align: center;
 	cursor: pointer;
+	color: var(--suggestion-fg);
 }
 
 .suggestion--highlighted {
 	scale: 1.1;
+	color: var(--suggestion-active-fg);
+	background-color: var(--suggestion-active-bg);
 }
 
 .removeBottomBorder {
