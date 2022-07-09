@@ -7,6 +7,7 @@ export const config = {
 				{ id: 0, title: "title1", uri: "uri1" },
 				{ id: 1, title: "title2", uri: "uri2" },
 			],
+			key: "a",
 		},
 		{
 			id: 1,
@@ -24,6 +25,7 @@ export const config = {
 				{ id: 5, title: "title8", uri: "uri8" },
 				{ id: 6, title: "title9", uri: "uri9" },
 			],
+			key: "s",
 		},
 		{
 			id: 2,
@@ -33,6 +35,7 @@ export const config = {
 				{ id: 1, title: "title11", uri: "uri11" },
 				{ id: 2, title: "title12", uri: "uri12" },
 			],
+			key: "d",
 		},
 		{
 			id: 3,
@@ -49,6 +52,7 @@ export const config = {
 				{ id: 8, title: "title21", uri: "uri21" },
 				{ id: 9, title: "title22", uri: "uri22" },
 			],
+			key: "f",
 		},
 	],
 	engines: {

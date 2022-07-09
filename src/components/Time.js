@@ -9,7 +9,7 @@ const Time = () => {
 	}, [])
 
 	return (
-		<div className="item time">
+		<div className="item time" tabIndex='0'>
 			<p>
 				{currDate.toLocaleString("en-US", {
 					hour: "2-digit",

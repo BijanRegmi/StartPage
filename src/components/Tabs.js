@@ -7,6 +7,7 @@ const Tabs = () => {
 	const {
 		config: { bookmarks },
 		currentTabIdx,
+		tabsRef,
 	} = useSelector(state => state.root)
 	const dispatch = useDispatch()
 
@@ -16,7 +17,7 @@ const Tabs = () => {
 	const setTab = t => dispatch({ type: CHANGE_TAB, payload: t })
 
 	return (
-		<div className="item tabs">
+		<div className="item tabs" ref={tabsRef} tabIndex="1">
 			{bookmarks.map((bookmark, idx) => {
 				let name = `folder `
 				idx == hoveredTab ? (name += "folder--hover ") : ""

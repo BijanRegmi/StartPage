@@ -3,17 +3,20 @@ import { useDispatch, useSelector } from "react-redux"
 import "../Styles/Search.css"
 
 import {
+	CHANGE_ENGINE,
 	EMPTY_SUGGESTION,
 	LOAD_SUGGESTION,
+	SEARCH_SUGGESTION,
 	SET_SUGGESTION,
 	SET_TITLE,
 } from "../StateManagement/action_types"
 
 const Search = () => {
 	// State Management
-	const { insertRef, insertMode } = useSelector(state => state.root)
 	const dispatch = useDispatch()
 	const {
+		insertRef,
+		searchRef,
 		querySuggestions,
 		activeEngine,
 		activeSuggestion,
@@ -40,13 +43,14 @@ const Search = () => {
 
 	// Use Effects
 	useEffect(() => {
+		console.log("Rendering search")
 		insertRef.current.focus()
 		dispatch({ type: SET_TITLE, payload: "Search" })
 	}, [])
 	useEffect(fetchSuggestions, [queryString, activeEngine])
 
 	return (
-		<div className="item search">
+		<div className="item search" ref={searchRef} tabIndex="4">
 			<input
 				type="text"
 				className={`query-input ${
@@ -74,7 +78,9 @@ const Search = () => {
 					{querySuggestions.map((suggestion, idx) => (
 						<div
 							key={idx}
-							onClick={() => visit(suggestion)}
+							onClick={() =>
+								dispatch({ type: SEARCH_SUGGESTION })
+							}
 							onMouseEnter={suggestionMouseEnter}
 							onMouseLeave={suggestionMouseLeave}
 							className={`suggestion ${
@@ -103,7 +109,12 @@ const Search = () => {
 						<div
 							key={idx}
 							className="engine"
-							onClick={() => changeEngine(engine)}
+							onClick={() =>
+								dispatch({
+									type: CHANGE_ENGINE,
+									payload: engine,
+								})
+							}
 						>
 							{engine}
 						</div>
