@@ -1,5 +1,8 @@
-import { config } from "../../config"
 import { createRef } from "react"
+
+let config = null
+if (process.env.CONFIG_PATH) config = require(process.env.CONFIG_PATH).config
+else config = require("../../config").config
 
 import {
 	CARD_ACTIVE,
