@@ -2,21 +2,35 @@ import { config } from "../../config"
 import { createRef } from "react"
 
 import {
+	CARD_ACTIVE,
+	CARD_CLICK,
+	CARD_DOWN,
+	CARD_LEFT,
+	CARD_RIGHT,
+	CARD_UP,
+	CHANGE_ENGINE,
 	CHANGE_TAB,
 	EMPTY_SUGGESTION,
 	LOAD_SUGGESTION,
+	SEARCH_QUERY,
+	SEARCH_SUGGESTION,
 	SET_SUGGESTION,
 	SET_TITLE,
-	TOGGLE_VIM,
-	VIM_COMMAND,
+	SUGGESTION_DOWN,
+	SUGGESTION_UP,
+	TABS_DOWN,
+	TABS_UP,
 } from "./action_types"
 
 const initalState = {
 	config,
 
 	insertRef: createRef(),
-	outerRef: createRef(),
-	insertMode: true,
+	tabsRef: createRef(),
+	cardsRef: createRef(),
+	searchRef: createRef(),
+	cmdRef: createRef(),
+	rootRef: createRef(),
 
 	currentTabIdx: 0,
 	activeCard: -1,
@@ -30,24 +44,25 @@ const initalState = {
 export const visit = location => (window.location = location)
 
 const rootReducer = (state = initalState, action) => {
+	let temp
 	switch (action.type) {
-		// Global
-		case TOGGLE_VIM:
-			if (document.activeElement == state.insertRef.current) {
-				state.outerRef.current.focus()
-				return { ...state, insertMode: false }
-			} else {
-				state.insertRef.current.focus()
-				return { ...state, insertMode: true }
-			}
-
 		case SET_TITLE:
 			return { ...state, title: action.payload }
 
+		// Tabs
 		case CHANGE_TAB:
 			return { ...state, currentTabIdx: action.payload }
 
-		// Search Page
+		case TABS_DOWN:
+			temp = (state.currentTabIdx + 1) % state.config.bookmarks.length
+			return { ...state, currentTabIdx: temp == NaN ? 0 : temp }
+
+		case TABS_UP:
+			temp = (state.currentTabIdx - 1) % state.config.bookmarks.length
+			if (temp < 0) temp += state.config.bookmarks.length
+			return { ...state, currentTabIdx: temp == NaN ? 0 : temp }
+
+		// Search
 		case EMPTY_SUGGESTION:
 			return { ...state, querySuggestions: [] }
 
@@ -62,9 +77,47 @@ const rootReducer = (state = initalState, action) => {
 		case SET_SUGGESTION:
 			return { ...state, activeSuggestion: action.payload }
 
-		// Key controls
-		case VIM_COMMAND:
-			console.log("Inside vim_command", action.payload)
+		case SUGGESTION_DOWN:
+			temp = (state.activeSuggestion + 1) % state.querySuggestions.length
+			return { ...state, activeSuggestion: temp == NaN ? -1 : temp }
+
+		case SUGGESTION_UP:
+			temp = (state.activeSuggestion - 1) % state.querySuggestions.length
+			if (temp < -1) temp += state.querySuggestions.length + 1
+			return { ...state, activeSuggestion: temp == NaN ? -1 : temp }
+
+		case SEARCH_QUERY:
+			visit(
+				state.config.engines[state.activeEngine].result(
+					state.insertRef.current.value
+				)
+			)
+			return state
+
+		case SEARCH_SUGGESTION:
+			if (state.activeSuggestion != -1)
+				visit(
+					state.config.engines[state.activeEngine].result(
+						state.querySuggestions[state.activeSuggestion]
+					)
+				)
+			return state
+
+		case CHANGE_ENGINE:
+			return { ...state, activeEngine: action.payload }
+
+		// Cards
+		case CARD_ACTIVE:
+			return { ...state, activeCard: action.payload }
+
+		case CARD_CLICK:
+			if (state.activeCard != -1) {
+				visit(
+					state.config.bookmarks[state.currentTabIdx].childrens[
+						state.activeCard
+					].uri
+				)
+			}
 			return state
 
 		case CARD_DOWN:
