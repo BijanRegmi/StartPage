@@ -6,12 +6,6 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-
-	background-color: lightpink;
-}
-
-.tabs:focus {
-	border: 1px solid red;
 }
 
 .folder {
@@ -25,8 +19,9 @@
 
 	font-size: 1.5rem;
 	font-weight: 600;
-	border-radius: 50%;
-	background-color: lightskyblue;
+	border-radius: 1rem;
+	background-color: var(--folder-bg);
+	color: var(--folder-fg);
 }
 
 .folder .tooltip {
@@ -35,8 +30,8 @@
 	z-index: 1;
 	position: absolute;
 
-	background-color: gray;
-	color: #fff;
+	background-color: var(--folder-tooltip-bg);
+	color: var(--folder-tooltip-fg);
 
 	visibility: hidden;
 	text-align: center;
@@ -49,5 +44,5 @@
 }
 
 .folder--active {
-	border: 2px solid green;
+	background-color: var(--folder-active-bg);
 }

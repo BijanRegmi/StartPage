@@ -1,0 +1,42 @@
+.nord {
+	/* Root */
+	--startpage-bg: #2e3440;
+	--item-bg: #3b4252;
+
+	/* Cards */
+	--card-bg: #434c5e;
+	--card-fg: #d8dee9;
+	--card-active-bg: #4c566a;
+
+	/* Cmd */
+	--prompt-bg: transparent;
+	--prompt-fg: #eceff4;
+	--stdin-bg: transparent;
+	--stdin-fg: #eceff4;
+	--stdin-border: #d08770;
+
+	/* Search */
+	--query-bg: #2e3440;
+	--query-fg: #eceff4;
+	--setengine-bg: #2e3440;
+	--setengine-fg: #eceff4;
+	--engines-bg: #2e3440;
+	--engines-fg: #eceff4;
+	--engine-bg: transparent;
+	--engine-fg: #eceff4;
+	--suggestions-bg: #2e3440;
+	--suggestion-fg: #eceff4;
+	--suggestion-active-bg: #2e3440;
+	--suggestion-active-fg: #d8dee9;
+
+	/* Tabs */
+	--folder-bg: #2e3440;
+	--folder-fg: #eceff4;
+	--folder-active-bg: #4c566a;
+	--folder-active-fg: #d8dee9;
+	--folder-tooltip-bg: transparent;
+	--folder-tooltip-fg: #a3be8c;
+
+	/* Time */
+	--time-fg: #d08770;
+}
