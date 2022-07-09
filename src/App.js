@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cards from "./components/Cards"
+import Cmd from "./components/Cmd"
 import Search from "./components/Search"
 import Tabs from "./components/Tabs"
 import Time from "./components/Time"
@@ -25,7 +26,6 @@ export default () => {
 
 	const handleKeyEvents = e => {
 		const { altKey, ctrlKey, key, keyCode, shiftKey } = e
-		console.log(key)
 
 		const activeElement = document.activeElement
 
@@ -47,6 +47,9 @@ export default () => {
 			switch (key) {
 				case "s":
 					return state.searchRef.current.focus()
+				case "i":
+					e.preventDefault()
+					return state.insertRef.current.focus()
 				case "t":
 					return state.tabsRef.current.focus()
 				case "c":
@@ -100,6 +103,10 @@ export default () => {
 		}
 	}
 
+	useEffect(() => {
+		state.rootRef.current.focus()
+	}, [])
+
 	return (
 		<div
 			className="startpage"
@@ -114,9 +121,7 @@ export default () => {
 			</div>
 			<Cards />
 			<Search />
-			<div className="item cmd" ref={state.cmdRef} tabIndex="5">
-				CMD
-			</div>
+			<Cmd />
 		</div>
 	)
 }
