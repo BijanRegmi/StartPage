@@ -49,6 +49,7 @@ const Cards = () => {
 					{card.title.length > clippingLen
 						? card.title.substring(0, clippingLen - 3) + "..."
 						: card.title}
+					<div className="card-key">{card.key}</div>
 				</div>
 			))}
 		</div>
