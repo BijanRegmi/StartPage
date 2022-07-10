@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RESET } from "../StateManagement/action_types"
+import { RESET, SET_THEME } from "../StateManagement/action_types"
 import { visit } from "../StateManagement/rootReducer"
 import "../Styles/Cmd.css"
 
@@ -17,9 +17,12 @@ const Cmd = () => {
 		e.preventDefault()
 		let c = cmd.replace(/^:/, "")
 		setCmd("")
-		switch (c) {
+		let args = c.split(" ")
+		switch (args[0]) {
 			case "rs":
 				return dispatch({ type: RESET })
+			case "theme":
+				return dispatch({ type: SET_THEME, payload: args[1] })
 			default:
 				break
 		}
