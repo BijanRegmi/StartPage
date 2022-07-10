@@ -19,6 +19,7 @@ import {
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
 	SET_SUGGESTION,
+	SET_THEME,
 	SET_TITLE,
 	SUGGESTION_DOWN,
 	SUGGESTION_UP,
@@ -43,6 +44,8 @@ const initialState = {
 	querySuggestions: [],
 	activeEngine: "Google",
 	activeSuggestion: -1,
+
+	theme: "nord",
 }
 
 export const visit = location => (window.location = location)
@@ -52,6 +55,10 @@ const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_TITLE:
 			return { ...state, title: action.payload }
+
+		case SET_THEME:
+			localStorage.setItem("theme", action.payload)
+			return { ...state, theme: action.payload }
 
 		// Tabs
 		case CHANGE_TAB:

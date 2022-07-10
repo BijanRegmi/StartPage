@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cards from "./components/Cards"
 import Cmd from "./components/Cmd"
@@ -7,6 +7,7 @@ import Tabs from "./components/Tabs"
 import Time from "./components/Time"
 import "./Styles/themes.css"
 import {
+	CARD_CLICK,
 	CARD_DOWN,
 	CARD_LEFT,
 	CARD_RIGHT,
@@ -15,11 +16,13 @@ import {
 	CHANGE_TAB,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
+	SET_THEME,
 	SUGGESTION_DOWN,
 	SUGGESTION_UP,
 	TABS_DOWN,
 	TABS_UP,
 } from "./StateManagement/action_types"
+import Weather from "./components/Weather"
 
 export default () => {
 	const state = useSelector(state => state.root)
@@ -85,6 +88,10 @@ export default () => {
 					return dispatch({ type: TABS_DOWN })
 				case "k":
 					return dispatch({ type: TABS_UP })
+				case "Enter":
+				case "c":
+					e.preventDefault()
+					return state.cardsRef.current.focus()
 			}
 			for (const tab of state.config.bookmarks)
 				if (tab.key === key)
@@ -99,6 +106,8 @@ export default () => {
 					return dispatch({ type: CARD_RIGHT })
 				case "h":
 					return dispatch({ type: CARD_LEFT })
+				case "Enter":
+					return dispatch({ type: CARD_CLICK })
 			}
 		} else if (activeElement == state.cmdRef.current) {
 		}
@@ -106,20 +115,20 @@ export default () => {
 
 	useEffect(() => {
 		state.rootRef.current.focus()
+		let t = localStorage.getItem("theme")
+		if (t) dispatch({ type: SET_THEME, payload: t })
 	}, [])
 
 	return (
 		<div
-			className="startpage nord"
+			className={`startpage ${state.theme}`}
 			tabIndex={0}
 			onKeyDown={handleKeyEvents}
 			ref={state.rootRef}
 		>
 			<Time />
 			<Tabs />
-			<div className="item weather" tabIndex="2">
-				Weather
-			</div>
+			<Weather />
 			<Cards />
 			<Search />
 			<Cmd />

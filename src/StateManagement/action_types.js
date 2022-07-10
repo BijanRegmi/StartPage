@@ -1,3 +1,5 @@
+// Global
+export const SET_THEME = "set_theme"
 // Search
 export const SET_SUGGESTION = "set_suggestion"
 export const LOAD_SUGGESTION = "load_suggestion"
