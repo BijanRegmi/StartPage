@@ -10,6 +10,7 @@ import {
 	CARD_DOWN,
 	CARD_LEFT,
 	CARD_RIGHT,
+	CARD_SHORTCUT,
 	CARD_UP,
 	CHANGE_ENGINE,
 	CHANGE_TAB,
@@ -196,6 +197,12 @@ const rootReducer = (state = initialState, action) => {
 				temp = cur_r * 4 + cur_c
 			}
 			return { ...state, activeCard: temp == NaN ? -1 : temp }
+
+		case CARD_SHORTCUT:
+			temp = state.config.bookmarks[state.currentTabIdx].childrens
+			for (const card of temp)
+				if (card.key == action.payload) visit(card.uri)
+			return state
 
 		// CMD
 		case RESET:

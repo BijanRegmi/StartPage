@@ -11,6 +11,7 @@ import {
 	CARD_DOWN,
 	CARD_LEFT,
 	CARD_RIGHT,
+	CARD_SHORTCUT,
 	CARD_UP,
 	CHANGE_ENGINE,
 	CHANGE_TAB,
@@ -47,6 +48,7 @@ export default () => {
 
 		if (key === "Escape") state.rootRef.current.focus()
 
+		// Root Window
 		if (activeElement == state.rootRef.current) {
 			switch (key) {
 				case "s":
@@ -64,6 +66,7 @@ export default () => {
 					return
 			}
 		} else if (activeElement == state.searchRef.current) {
+			// SEARCH WIDGET
 			switch (key) {
 				case "Escape":
 					return state.rootRef.current.focus()
@@ -79,10 +82,13 @@ export default () => {
 				default:
 					break
 			}
+
+			// SEARCH ENGINES SHORTCUT KEY
 			for (const engine in state.config.engines)
 				if (state.config.engines[engine].key == key)
 					return dispatch({ type: CHANGE_ENGINE, payload: engine })
 		} else if (activeElement == state.tabsRef.current) {
+			// TABS WIDGET
 			switch (key) {
 				case "j":
 					return dispatch({ type: TABS_DOWN })
@@ -90,12 +96,15 @@ export default () => {
 					return dispatch({ type: TABS_UP })
 				case "Enter":
 				case "c":
-					e.preventDefault()
 					return state.cardsRef.current.focus()
 			}
+
+			// TABS SHORTCUT KEY
 			for (const tab of state.config.bookmarks)
-				if (tab.key === key)
+				if (tab.key === key) {
+					state.cardsRef.current.focus()
 					return dispatch({ type: CHANGE_TAB, payload: tab.id })
+				}
 		} else if (activeElement == state.cardsRef.current) {
 			switch (key) {
 				case "j":
@@ -108,6 +117,8 @@ export default () => {
 					return dispatch({ type: CARD_LEFT })
 				case "Enter":
 					return dispatch({ type: CARD_CLICK })
+				default:
+					return dispatch({ type: CARD_SHORTCUT, payload: key })
 			}
 		} else if (activeElement == state.cmdRef.current) {
 		}

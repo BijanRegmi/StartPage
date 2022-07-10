@@ -18,6 +18,7 @@
 	padding: 0.5rem;
 
 	border-radius: 1rem;
+	position: relative;
 
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -32,4 +33,10 @@
 .card--active {
 	scale: 1.05;
 	background-color: var(--card-active-bg);
+}
+
+.card-key {
+	position: absolute;
+	bottom: 7%;
+	right: 7%;
 }
