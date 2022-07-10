@@ -40,3 +40,132 @@
 	/* Time */
 	--time-fg: #d08770;
 }
+
+.fall {
+	/* Root */
+	--startpage-bg: #ffd4a3;
+	--item-bg: #ffaa5e;
+
+	/* Cards */
+	--card-bg: #ed9a4f;
+	--card-fg: #fff7ef;
+	--card-active-bg: #d08237;
+
+	/* Cmd */
+	--prompt-bg: #d08237;
+	--prompt-fg: #fff7ef;
+	--stdin-bg: #d08237;
+	--stdin-fg: #fff7ef;
+	--stdin-border: #fff7ef;
+
+	/* Search */
+	--query-bg: #d08237;
+	--query-fg: #fff7ef;
+	--setengine-bg: #d08237;
+	--setengine-fg: #fff7ef;
+	--engines-bg: #d08237;
+	--engines-fg: #fff7ef;
+	--engine-bg: transparent;
+	--engine-fg: #fff7ef;
+	--suggestions-bg: #d08237;
+	--suggestion-fg: #fff7ef;
+	--suggestion-active-bg: #d08237;
+	--suggestion-active-fg: #dfe0df;
+
+	/* Tabs */
+	--folder-bg: #d08237;
+	--folder-fg: #dfe0df;
+	--folder-active-bg: #ed9a4f;
+	--folder-active-fg: #fff7ef;
+	--folder-tooltip-bg: transparent;
+	--folder-tooltip-fg: #4d1100;
+
+	/* Time */
+	--time-fg: #4d1100;
+}
+
+.ice {
+	/* Root */
+	--startpage-bg: #112432;
+	--item-bg: #0e455c;
+
+	/* Cards */
+	--card-bg: #0c768d;
+	--card-fg: #f9f9f7;
+	--card-active-bg: #08b2c6;
+
+	/* Cmd */
+	--prompt-bg: transparent;
+	--prompt-fg: #f9f9f7;
+	--stdin-bg: transparent;
+	--stdin-fg: #f9f9f7;
+	--stdin-border: #03faf7;
+
+	/* Search */
+	--query-bg: #112432;
+	--query-fg: #f9f9f7;
+	--setengine-bg: #112432;
+	--setengine-fg: #f9f9f7;
+	--engines-bg: #112432;
+	--engines-fg: #f9f9f7;
+	--engine-bg: transparent;
+	--engine-fg: #f9f9f7;
+	--suggestions-bg: #112432;
+	--suggestion-fg: #f9f9f7;
+	--suggestion-active-bg: #112432;
+	--suggestion-active-fg: #e0e0cc;
+
+	/* Tabs */
+	--folder-bg: #0c768d;
+	--folder-fg: #f9f9f7;
+	--folder-active-bg: #08b2c6;
+	--folder-active-fg: #e0e0cc;
+	--folder-tooltip-bg: transparent;
+	--folder-tooltip-fg: #03faf7;
+
+	/* Time */
+	--time-fg: #08b2c6;
+}
+
+.coca {
+	/* Root */
+	--startpage-bg: #3e0f08;
+	--item-bg: #7a3f13;
+
+	/* Cards */
+	--card-bg: #a8640a;
+	--card-fg: #3e0f08;
+	--card-active-bg: #d79713;
+
+	/* Cmd */
+	--prompt-bg: #58240f;
+	--prompt-fg: #eda614;
+	--stdin-bg: #58240f;
+	--stdin-fg: #eda614;
+	--stdin-border: #f3ffff;
+
+	/* Search */
+	--query-bg: #58240f;
+	--query-fg: #eda614;
+	--setengine-bg: #58240f;
+	--setengine-fg: #eda614;
+	--engines-bg: #58240f;
+	--engines-fg: #eda614;
+	--engine-bg: transparent;
+	--engine-fg: #eda614;
+	--suggestions-bg: #58240f;
+	--suggestion-fg: #eda614;
+	--suggestion-active-bg: #58240f;
+	--suggestion-active-fg: #d79713;
+
+	/* Tabs */
+	--folder-bg: #a8640a;
+	--folder-fg: #eda614;
+	--folder-active-bg: #d79713;
+	--folder-active-fg: #58240f;
+	--folder-tooltip-bg: transparent;
+	--folder-tooltip-fg: #3e0f08;
+
+	/* Time */
+	--time-fg: #b67018;
+}

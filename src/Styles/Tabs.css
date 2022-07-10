@@ -20,6 +20,7 @@
 	font-size: 1.5rem;
 	font-weight: 600;
 	border-radius: 1rem;
+	cursor: pointer;
 	background-color: var(--folder-bg);
 	color: var(--folder-fg);
 }
@@ -45,4 +46,5 @@
 
 .folder--active {
 	background-color: var(--folder-active-bg);
+	color: var(--folder-active-fg);
 }

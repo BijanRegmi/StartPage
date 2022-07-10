@@ -34,7 +34,7 @@ const Search = () => {
 	const suggestionMouseLeave = e =>
 		dispatch({ type: SET_SUGGESTION, payload: -1 })
 	const fetchSuggestions = () => {
-		if (queryString.length > 2)
+		if (queryString.length > 2 && engines[activeEngine].url)
 			fetch(engines[activeEngine].url + queryString)
 				.then(res => res.json())
 				.then(res => dispatch({ type: LOAD_SUGGESTION, payload: res }))

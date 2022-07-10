@@ -10,6 +10,10 @@
 	font-family: "Edu NSW ACT Foundation", cursive;
 }
 
+*:focus {
+	outline: none;
+}
+
 html,
 body,
 #root {
