@@ -7,7 +7,7 @@ const Weather = () => {
 
 	return (
 		<div className="item weather">
-			<button onClick={click}>Click Me</button>
+			{/* <button onClick={click}>Click Me</button> */}
 		</div>
 	)
 }
