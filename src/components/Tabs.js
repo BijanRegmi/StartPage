@@ -31,7 +31,7 @@ const Tabs = () => {
 						onMouseLeave={mouseLeave}
 						onClick={() => setTab(idx)}
 					>
-						{bookmark.title[0].toUpperCase()}
+						{bookmark.key}
 						<span className="tooltip">{bookmark.title}</span>
 					</div>
 				)

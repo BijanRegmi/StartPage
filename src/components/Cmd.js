@@ -15,8 +15,12 @@ const Cmd = () => {
 	const changeCmd = e => setCmd(e.target.value)
 	const cmdParser = e => {
 		e.preventDefault()
+
+		// remove the leading :
 		let c = cmd.replace(/^:/, "")
+
 		setCmd("")
+
 		let args = c.split(" ")
 		switch (args[0]) {
 			case "rs":
@@ -27,6 +31,12 @@ const Cmd = () => {
 				break
 		}
 		if (c in links) visit(links[c])
+
+		// Visit the localhost port address
+		const portNum = args[0].match(/^\d+/g)[0]
+		const endpoint = args[0].replace(/^\d+/g, "")
+		const url = `http://localhost:${portNum}${endpoint}`
+		visit(url)
 	}
 
 	return (

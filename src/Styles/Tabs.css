@@ -34,14 +34,14 @@
 	background-color: var(--folder-tooltip-bg);
 	color: var(--folder-tooltip-fg);
 
-	visibility: hidden;
+	opacity: 0;
 	text-align: center;
 	border-radius: 0.5rem;
 }
 
 .folder:hover .tooltip,
 .folder--hover .tooltip {
-	visibility: visible;
+	opacity: 1;
 }
 
 .folder--active {
