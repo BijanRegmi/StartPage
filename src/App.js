@@ -26,7 +26,7 @@ import {
 	TABS_DOWN,
 	TABS_UP,
 } from "./StateManagement/action_types"
-import Weather from "./components/Weather"
+import Settings from "./components/Settings"
 
 export default () => {
 	const state = useSelector(state => state.root)
@@ -146,7 +146,7 @@ export default () => {
 		>
 			<Time />
 			<Tabs />
-			<Weather />
+			<Settings />
 			<Cards />
 			<Search />
 			<Cmd />

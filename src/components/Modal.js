@@ -19,6 +19,7 @@ const Modal = ({ inputs, onSave, onDiscard }) => {
 						<input
 							name={input.name}
 							type={input.type}
+							defaultValue={input.defaultValue}
 							placeholder={input.placeholder}
 						/>
 					</div>

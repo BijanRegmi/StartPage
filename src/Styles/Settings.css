@@ -1,0 +1,26 @@
+.settings {
+	grid-row: 2;
+	grid-column: 1;
+	position: relative;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.settings > button {
+	background-color: transparent;
+	outline: none;
+	border: 1px solid transparent;
+	cursor: pointer;
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+	padding: 10px;
+	border-radius: 1rem;
+	color: var(--card-fg);
+}
+
+.settings > button:hover {
+	border: 1px solid white;
+}

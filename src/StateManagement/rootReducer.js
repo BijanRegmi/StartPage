@@ -230,10 +230,22 @@ const rootReducer = (state = initialState, action) => {
 		case TOGGLE_EDIT:
 			return { ...state, editing: !state.editing }
 		case ADD_TAB:
-			return { ...state, bookmarks: [...state.bookmarks, action.payload] }
+			var { data, idx } = action.payload
+			var newBookmarks = state.bookmarks
+			if (idx != undefined)
+				newBookmarks[idx] = {
+					...data,
+					childrens: newBookmarks[idx].childrens,
+				}
+			else newBookmarks.push({ ...data, childrens: [] })
+			return { ...state, bookmarks: newBookmarks }
 		case ADD_BOOKMARK:
-			const newBookmarks = state.bookmarks
-			newBookmarks[state.currentTabIdx].childrens.push(action.payload)
+			var { data, idx } = action.payload
+			var newBookmarks = state.bookmarks
+			if (idx != undefined)
+				newBookmarks[state.currentTabIdx].childrens[idx] = data
+			else newBookmarks[state.currentTabIdx].childrens.push(data)
+			console.log({ old: state.bookmarks, new: newBookmarks })
 			return { ...state, bookmarks: newBookmarks }
 		default:
 			return state
