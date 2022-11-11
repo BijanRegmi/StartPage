@@ -16,9 +16,10 @@ import {
 	CARD_UP,
 	CHANGE_ENGINE,
 	CHANGE_TAB,
+	LOAD_BOOKMARKS,
+	LOAD_LINKS,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
-	SET_BOOKMARKS,
 	SET_THEME,
 	SUGGESTION_DOWN,
 	SUGGESTION_UP,
@@ -132,11 +133,8 @@ export default () => {
 		let theme = localStorage.getItem("theme")
 		if (theme) dispatch({ type: SET_THEME, payload: theme })
 
-		let links = localStorage.getItem("links")
-		if (links) dispatch({ type: SET_LINK, payload: links })
-
-		let bookmarks = localStorage.getItem("bookmarks")
-		if (bookmarks) dispatch({ type: SET_BOOKMARKS, payload: bookmarks })
+		dispatch({ type: LOAD_LINKS })
+		dispatch({ type: LOAD_BOOKMARKS })
 	}, [])
 
 	return (

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "../Styles/Cards.css"
 
@@ -8,10 +8,13 @@ import {
 	SET_TITLE,
 } from "../StateManagement/action_types"
 
+import Modal from "./Modal"
+const clippingLen = 30
+
 const Cards = () => {
-	const { activeCard, bookmarks, currentTabIdx, cardsRef } = useSelector(
-		state => state.root
-	)
+	const [adding, setAdding] = useState(false)
+	const { activeCard, bookmarks, currentTabIdx, cardsRef, editing } =
+		useSelector(state => state.root)
 	const dispatch = useDispatch()
 
 	const hoverIn = e => {
@@ -22,13 +25,13 @@ const Cards = () => {
 		})
 		dispatch({ type: CARD_ACTIVE, payload: idx })
 	}
-	const hoverOut = e => {
+
+	const hoverOut = () => {
 		dispatch({ type: SET_TITLE, payload: "..." })
 		dispatch({ type: CARD_ACTIVE, payload: -1 })
 	}
-	const click = e => dispatch({ type: CARD_CLICK })
 
-	const clippingLen = 30
+	const click = () => dispatch({ type: CARD_CLICK })
 
 	return (
 		<div className="item cards" ref={cardsRef} tabIndex="3">
@@ -47,6 +50,48 @@ const Cards = () => {
 					<div className="card-key">{card.key}</div>
 				</div>
 			))}
+			{editing && bookmarks[currentTabIdx] ? (
+				<div
+					className="card"
+					onClick={() => {
+						setAdding(old => !old)
+					}}
+				>
+					+
+				</div>
+			) : null}
+			{adding ? (
+				<Modal
+					inputs={[
+						{
+							name: "title",
+							type: "text",
+							label: "Title",
+							placeholder: "Title",
+						},
+						{
+							name: "uri",
+							type: "text",
+							label: "URL",
+							placeholder: "Site url",
+						},
+						{
+							name: "key",
+							type: "text",
+							label: "Key",
+							placeholder: "Single character key",
+						},
+					]}
+					onDiscard={e => {
+						e.preventDefault()
+						setAdding(false)
+					}}
+					onSave={data => {
+						console.log(data)
+						setAdding(false)
+					}}
+				/>
+			) : null}
 		</div>
 	)
 }

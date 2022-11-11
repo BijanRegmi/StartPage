@@ -30,5 +30,10 @@ export const CARD_SHORTCUT = "card_shortcut"
 export const RESET = "reset"
 
 // Config
-export const SET_LINKS = "set_links"
-export const SET_BOOKMARKS = "set_bookmarks"
+export const LOAD_LINKS = "load_links"
+export const LOAD_BOOKMARKS = "load_bookmarks"
+export const SAVE_LINKS = "save_links"
+export const SAVE_BOOKMARKS = "save_bookmarks"
+
+// Editin
+export const TOGGLE_EDIT = "toggle_edit"

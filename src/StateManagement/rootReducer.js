@@ -12,12 +12,14 @@ import {
 	CHANGE_ENGINE,
 	CHANGE_TAB,
 	EMPTY_SUGGESTION,
+	LOAD_BOOKMARKS,
+	LOAD_LINKS,
 	LOAD_SUGGESTION,
 	RESET,
+	SAVE_BOOKMARKS,
+	SAVE_LINKS,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
-	SET_BOOKMARKS,
-	SET_LINKS,
 	SET_SUGGESTION,
 	SET_THEME,
 	SET_TITLE,
@@ -25,9 +27,12 @@ import {
 	SUGGESTION_UP,
 	TABS_DOWN,
 	TABS_UP,
+	TOGGLE_EDIT,
 } from "./action_types"
 
 const initialState = {
+	editing: false,
+
 	insertRef: createRef(),
 	tabsRef: createRef(),
 	cardsRef: createRef(),
@@ -202,11 +207,26 @@ const rootReducer = (state = initialState, action) => {
 		// CMD
 		case RESET:
 			return initialState
+
 		// Config
-		case SET_LINKS:
-			return state
-		case SET_BOOKMARKS:
-			return state
+		case LOAD_LINKS:
+			let links = localStorage.getItem("links")
+			if (links) return { ...state, links }
+			else return state
+		case LOAD_BOOKMARKS:
+			let bookmarks = localStorage.getItem("bookmarks")
+			if (bookmarks) return { ...state, bookmarks }
+			else return state
+		case SAVE_LINKS:
+			localStorage.setItem("links", action.payload)
+			return { ...state, links: action.payload }
+		case SAVE_BOOKMARKS:
+			localStorage.setItem("bookmarks", action.payload)
+			return { ...state, bookmarks: action.payload }
+
+		// Editing
+		case TOGGLE_EDIT:
+			return { ...state, editing: !state.editing }
 		default:
 			return state
 	}

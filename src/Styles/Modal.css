@@ -1,0 +1,82 @@
+.modal-wrapper {
+	position: fixed;
+	inset: 0;
+	z-index: 10;
+	overflow-y: auto;
+}
+
+.modal-outer {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.4;
+}
+
+.modal-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: white;
+	border-radius: 0.25rem;
+	padding: 1.5rem 2rem 2rem 2rem;
+	margin-bottom: 1rem;
+	color: black;
+}
+
+.input-group {
+	margin-bottom: 1rem;
+}
+
+.input-group > label {
+	display: block;
+	color: rgb(55, 65, 81);
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	margin-bottom: 0.5rem;
+}
+
+.input-group > input {
+	appearance: none;
+	border-width: 1px;
+	border-radius: 0.25rem;
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	color: rgb(55, 65, 81);
+	line-height: 1.25;
+}
+
+.inputs > input:focus {
+	outline: none;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.actions > button {
+	width: 30%;
+	padding: 0.5rem 0px;
+	border-radius: 0.25rem;
+	color: white;
+	cursor: pointer;
+}
+
+.action-save {
+	background-color: rgb(6, 78, 59);
+}
+.action-save:hover {
+	background-color: rgb(6, 95, 70);
+}
+
+.action-discard {
+	background-color: rgb(127, 29, 29);
+}
+
+.action-discard:hover {
+	background-color: rgb(153, 27, 27);
+}

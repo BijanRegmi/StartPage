@@ -2,14 +2,16 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CHANGE_TAB } from "../StateManagement/action_types"
 import "../Styles/Tabs.css"
+import Modal from "./Modal"
 
 const Tabs = () => {
-	const { bookmarks, currentTabIdx, tabsRef } = useSelector(
+	const { bookmarks, currentTabIdx, tabsRef, editing } = useSelector(
 		state => state.root
 	)
 	const dispatch = useDispatch()
 
 	const [hoveredTab, setHoveredTab] = useState(-1)
+	const [adding, setAdding] = useState(false)
 	const mouseEnter = e => setHoveredTab(parseInt(e._targetInst.key))
 	const mouseLeave = e => setHoveredTab(-1)
 	const setTab = t => dispatch({ type: CHANGE_TAB, payload: t })
@@ -23,7 +25,7 @@ const Tabs = () => {
 
 				return (
 					<div
-						key={bookmark.id}
+						key={idx}
 						className={name}
 						onMouseEnter={mouseEnter}
 						onMouseLeave={mouseLeave}
@@ -34,6 +36,42 @@ const Tabs = () => {
 					</div>
 				)
 			})}
+			{editing ? (
+				<div
+					className="folder"
+					onClick={() => {
+						setAdding(true)
+					}}
+				>
+					+<span className="tooltip">Add new tab</span>
+				</div>
+			) : null}
+			{editing && adding ? (
+				<Modal
+					inputs={[
+						{
+							name: "title",
+							type: "text",
+							label: "Title",
+							placeholder: "Folder name",
+						},
+						{
+							name: "key",
+							type: "text",
+							label: "Shortcut",
+							placeholder: "Single character key",
+						},
+					]}
+					onDiscard={e => {
+						e.preventDefault()
+						setAdding(false)
+					}}
+					onSave={data => {
+						console.log(data)
+						setAdding(false)
+					}}
+				/>
+			) : null}
 		</div>
 	)
 }
