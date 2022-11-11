@@ -2,6 +2,8 @@ import { createRef } from "react"
 import { engines } from "../engines"
 
 import {
+	ADD_BOOKMARK,
+	ADD_TAB,
 	CARD_ACTIVE,
 	CARD_CLICK,
 	CARD_DOWN,
@@ -211,22 +213,28 @@ const rootReducer = (state = initialState, action) => {
 		// Config
 		case LOAD_LINKS:
 			let links = localStorage.getItem("links")
-			if (links) return { ...state, links }
+			if (links) return { ...state, links: JSON.parse(links) }
 			else return state
 		case LOAD_BOOKMARKS:
 			let bookmarks = localStorage.getItem("bookmarks")
-			if (bookmarks) return { ...state, bookmarks }
+			if (bookmarks) return { ...state, bookmarks: JSON.parse(bookmarks) }
 			else return state
 		case SAVE_LINKS:
-			localStorage.setItem("links", action.payload)
-			return { ...state, links: action.payload }
+			localStorage.setItem("links", JSON.stringify(state.links))
+			return state
 		case SAVE_BOOKMARKS:
-			localStorage.setItem("bookmarks", action.payload)
-			return { ...state, bookmarks: action.payload }
+			localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks))
+			return state
 
 		// Editing
 		case TOGGLE_EDIT:
 			return { ...state, editing: !state.editing }
+		case ADD_TAB:
+			return { ...state, bookmarks: [...state.bookmarks, action.payload] }
+		case ADD_BOOKMARK:
+			const newBookmarks = state.bookmarks
+			newBookmarks[state.currentTabIdx].childrens.push(action.payload)
+			return { ...state, bookmarks: newBookmarks }
 		default:
 			return state
 	}

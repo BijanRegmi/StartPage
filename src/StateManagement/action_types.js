@@ -37,3 +37,5 @@ export const SAVE_BOOKMARKS = "save_bookmarks"
 
 // Editin
 export const TOGGLE_EDIT = "toggle_edit"
+export const ADD_TAB = "add_tab"
+export const ADD_BOOKMARK = "add_bookmark"

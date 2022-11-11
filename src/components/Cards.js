@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import "../Styles/Cards.css"
 
 import {
+	ADD_BOOKMARK,
 	CARD_ACTIVE,
 	CARD_CLICK,
 	SET_TITLE,
@@ -87,7 +88,7 @@ const Cards = () => {
 						setAdding(false)
 					}}
 					onSave={data => {
-						console.log(data)
+						dispatch({ type: ADD_BOOKMARK, payload: data })
 						setAdding(false)
 					}}
 				/>

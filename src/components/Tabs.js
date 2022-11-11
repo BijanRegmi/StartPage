@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { CHANGE_TAB } from "../StateManagement/action_types"
+import { ADD_TAB, CHANGE_TAB } from "../StateManagement/action_types"
 import "../Styles/Tabs.css"
 import Modal from "./Modal"
 
@@ -67,7 +67,8 @@ const Tabs = () => {
 						setAdding(false)
 					}}
 					onSave={data => {
-						console.log(data)
+						data.childrens = []
+						dispatch({ type: ADD_TAB, payload: data })
 						setAdding(false)
 					}}
 				/>

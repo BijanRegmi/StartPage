@@ -1,6 +1,11 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RESET, SET_THEME } from "../StateManagement/action_types"
+import {
+	RESET,
+	SAVE_BOOKMARKS,
+	SET_THEME,
+	TOGGLE_EDIT,
+} from "../StateManagement/action_types"
 import { visit } from "../StateManagement/rootReducer"
 import "../Styles/Cmd.css"
 
@@ -24,6 +29,10 @@ const Cmd = () => {
 				return dispatch({ type: RESET })
 			case "theme":
 				return dispatch({ type: SET_THEME, payload: args[1] })
+			case "edit":
+				return dispatch({ type: TOGGLE_EDIT })
+			case "save":
+				return dispatch({ type: SAVE_BOOKMARKS })
 			default:
 				break
 		}
