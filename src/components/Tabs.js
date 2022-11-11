@@ -4,11 +4,9 @@ import { CHANGE_TAB } from "../StateManagement/action_types"
 import "../Styles/Tabs.css"
 
 const Tabs = () => {
-	const {
-		config: { bookmarks },
-		currentTabIdx,
-		tabsRef,
-	} = useSelector(state => state.root)
+	const { bookmarks, currentTabIdx, tabsRef } = useSelector(
+		state => state.root
+	)
 	const dispatch = useDispatch()
 
 	const [hoveredTab, setHoveredTab] = useState(-1)

@@ -1,8 +1,5 @@
 import { createRef } from "react"
-
-let config = null
-if (process.env.CONFIG_PATH) config = require(process.env.CONFIG_PATH).config
-else config = require("../../config").config
+import { engines } from "../engines"
 
 import {
 	CARD_ACTIVE,
@@ -19,6 +16,8 @@ import {
 	RESET,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
+	SET_BOOKMARKS,
+	SET_LINKS,
 	SET_SUGGESTION,
 	SET_THEME,
 	SET_TITLE,
@@ -29,8 +28,6 @@ import {
 } from "./action_types"
 
 const initialState = {
-	config,
-
 	insertRef: createRef(),
 	tabsRef: createRef(),
 	cardsRef: createRef(),
@@ -47,6 +44,8 @@ const initialState = {
 	activeSuggestion: -1,
 
 	theme: "nord",
+	links: {},
+	bookmarks: [],
 }
 
 export const visit = location => (window.location = location)
@@ -66,12 +65,12 @@ const rootReducer = (state = initialState, action) => {
 			return { ...state, currentTabIdx: action.payload }
 
 		case TABS_DOWN:
-			temp = (state.currentTabIdx + 1) % state.config.bookmarks.length
+			temp = (state.currentTabIdx + 1) % state.bookmarks.length
 			return { ...state, currentTabIdx: temp == NaN ? 0 : temp }
 
 		case TABS_UP:
-			temp = (state.currentTabIdx - 1) % state.config.bookmarks.length
-			if (temp < 0) temp += state.config.bookmarks.length
+			temp = (state.currentTabIdx - 1) % state.bookmarks.length
+			if (temp < 0) temp += state.bookmarks.length
 			return { ...state, currentTabIdx: temp == NaN ? 0 : temp }
 
 		// Search
@@ -81,9 +80,9 @@ const rootReducer = (state = initialState, action) => {
 		case LOAD_SUGGESTION:
 			return {
 				...state,
-				querySuggestions: state.config.engines[
-					state.activeEngine
-				].parser(action.payload),
+				querySuggestions: engines[state.activeEngine].parser(
+					action.payload
+				),
 			}
 
 		case SET_SUGGESTION:
@@ -100,7 +99,7 @@ const rootReducer = (state = initialState, action) => {
 
 		case SEARCH_QUERY:
 			visit(
-				state.config.engines[state.activeEngine].result(
+				engines[state.activeEngine].result(
 					state.insertRef.current.value
 				)
 			)
@@ -109,7 +108,7 @@ const rootReducer = (state = initialState, action) => {
 		case SEARCH_SUGGESTION:
 			if (state.activeSuggestion != -1)
 				visit(
-					state.config.engines[state.activeEngine].result(
+					engines[state.activeEngine].result(
 						state.querySuggestions[state.activeSuggestion]
 					)
 				)
@@ -125,7 +124,7 @@ const rootReducer = (state = initialState, action) => {
 		case CARD_CLICK:
 			if (state.activeCard != -1) {
 				visit(
-					state.config.bookmarks[state.currentTabIdx].childrens[
+					state.bookmarks[state.currentTabIdx].childrens[
 						state.activeCard
 					].uri
 				)
@@ -135,8 +134,7 @@ const rootReducer = (state = initialState, action) => {
 		case CARD_DOWN:
 			if (state.activeCard == -1) temp = 0
 			else {
-				let len =
-					state.config.bookmarks[state.currentTabIdx].childrens.length
+				let len = state.bookmarks[state.currentTabIdx].childrens.length
 				let full_row = Math.floor(len / 4)
 				let last_col = len % 4
 				let cur_i = state.activeCard
@@ -153,8 +151,7 @@ const rootReducer = (state = initialState, action) => {
 		case CARD_UP:
 			if (state.activeCard == -1) temp = 0
 			else {
-				let len =
-					state.config.bookmarks[state.currentTabIdx].childrens.length
+				let len = state.bookmarks[state.currentTabIdx].childrens.length
 				let full_row = Math.floor(len / 4)
 				let last_col = len % 4
 				let cur_i = state.activeCard
@@ -169,8 +166,7 @@ const rootReducer = (state = initialState, action) => {
 		case CARD_LEFT:
 			if (state.activeCard == -1) temp = 0
 			else {
-				let len =
-					state.config.bookmarks[state.currentTabIdx].childrens.length
+				let len = state.bookmarks[state.currentTabIdx].childrens.length
 				let full_row = Math.floor(len / 4)
 				let last_col = len % 4
 				let cur_i = state.activeCard
@@ -184,8 +180,7 @@ const rootReducer = (state = initialState, action) => {
 		case CARD_RIGHT:
 			if (state.activeCard == -1) temp = 0
 			else {
-				let len =
-					state.config.bookmarks[state.currentTabIdx].childrens.length
+				let len = state.bookmarks[state.currentTabIdx].childrens.length
 				let full_row = Math.floor(len / 4)
 				let last_col = len % 4
 				let cur_i = state.activeCard
@@ -199,7 +194,7 @@ const rootReducer = (state = initialState, action) => {
 			return { ...state, activeCard: temp == NaN ? -1 : temp }
 
 		case CARD_SHORTCUT:
-			temp = state.config.bookmarks[state.currentTabIdx].childrens
+			temp = state.bookmarks[state.currentTabIdx].childrens
 			for (const card of temp)
 				if (card.key == action.payload) visit(card.uri)
 			return state
@@ -207,6 +202,11 @@ const rootReducer = (state = initialState, action) => {
 		// CMD
 		case RESET:
 			return initialState
+		// Config
+		case SET_LINKS:
+			return state
+		case SET_BOOKMARKS:
+			return state
 		default:
 			return state
 	}

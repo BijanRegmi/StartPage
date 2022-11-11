@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { engines } from "./engines"
 import Cards from "./components/Cards"
 import Cmd from "./components/Cmd"
 import Search from "./components/Search"
@@ -17,6 +18,7 @@ import {
 	CHANGE_TAB,
 	SEARCH_QUERY,
 	SEARCH_SUGGESTION,
+	SET_BOOKMARKS,
 	SET_THEME,
 	SUGGESTION_DOWN,
 	SUGGESTION_UP,
@@ -84,8 +86,8 @@ export default () => {
 			}
 
 			// SEARCH ENGINES SHORTCUT KEY
-			for (const engine in state.config.engines)
-				if (state.config.engines[engine].key == key)
+			for (const engine in engines)
+				if (engines[engine].key == key)
 					return dispatch({ type: CHANGE_ENGINE, payload: engine })
 		} else if (activeElement == state.tabsRef.current) {
 			// TABS WIDGET
@@ -100,7 +102,7 @@ export default () => {
 			}
 
 			// TABS SHORTCUT KEY
-			for (const tab of state.config.bookmarks)
+			for (const tab of state.bookmarks)
 				if (tab.key === key) {
 					state.cardsRef.current.focus()
 					return dispatch({ type: CHANGE_TAB, payload: tab.id })
@@ -126,8 +128,15 @@ export default () => {
 
 	useEffect(() => {
 		state.rootRef.current.focus()
-		let t = localStorage.getItem("theme")
-		if (t) dispatch({ type: SET_THEME, payload: t })
+
+		let theme = localStorage.getItem("theme")
+		if (theme) dispatch({ type: SET_THEME, payload: theme })
+
+		let links = localStorage.getItem("links")
+		if (links) dispatch({ type: SET_LINK, payload: links })
+
+		let bookmarks = localStorage.getItem("bookmarks")
+		if (bookmarks) dispatch({ type: SET_BOOKMARKS, payload: bookmarks })
 	}, [])
 
 	return (

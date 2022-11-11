@@ -6,10 +6,7 @@ import "../Styles/Cmd.css"
 
 const Cmd = () => {
 	const [cmd, setCmd] = useState("")
-	const {
-		cmdRef,
-		config: { links },
-	} = useSelector(state => state.root)
+	const { cmdRef, links } = useSelector(state => state.root)
 	const dispatch = useDispatch()
 
 	const changeCmd = e => setCmd(e.target.value)

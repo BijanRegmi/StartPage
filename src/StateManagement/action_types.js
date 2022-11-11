@@ -28,3 +28,7 @@ export const CARD_SHORTCUT = "card_shortcut"
 
 // CMD
 export const RESET = "reset"
+
+// Config
+export const SET_LINKS = "set_links"
+export const SET_BOOKMARKS = "set_bookmarks"

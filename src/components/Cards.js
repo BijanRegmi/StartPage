@@ -7,15 +7,11 @@ import {
 	CARD_CLICK,
 	SET_TITLE,
 } from "../StateManagement/action_types"
-import { visit } from "../StateManagement/rootReducer"
 
 const Cards = () => {
-	const {
-		activeCard,
-		config: { bookmarks },
-		currentTabIdx,
-		cardsRef,
-	} = useSelector(state => state.root)
+	const { activeCard, bookmarks, currentTabIdx, cardsRef } = useSelector(
+		state => state.root
+	)
 	const dispatch = useDispatch()
 
 	const hoverIn = e => {
@@ -39,9 +35,8 @@ const Cards = () => {
 			{bookmarks[currentTabIdx]?.childrens?.map((card, idx) => (
 				<div
 					key={idx}
-					className={`card ${
-						activeCard == idx ? "card--active" : ""
-					}`}
+					className={`card ${activeCard == idx ? "card--active" : ""
+						}`}
 					onMouseEnter={hoverIn}
 					onMouseLeave={hoverOut}
 					onClick={click}
